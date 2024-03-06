@@ -9,6 +9,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 
+require('dotenv').config();
 
 // Flash Middleware Start //
 app.use(cookieParser("rastgeleScript"));
@@ -43,9 +44,8 @@ app.use((req, res, next) => {
 
  
 // MongoDB Connection Start //
-const mongoDbConnection = mongoose.connect(
-  "ChangeHere"
-);
+const mongoDbConnection = mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
+
 mongoose.connection.on("open", () => {
   console.log("MongoDB Bağlantısı Kuruldu");
 });
@@ -64,6 +64,9 @@ const hbs = exphbs.create({
     allowProtoMethodsByDefault: true,
   },
 });
+
+app.use(express.static('public'));
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 // Handlebars Engine Middleware End

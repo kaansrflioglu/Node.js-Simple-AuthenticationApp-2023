@@ -1,7 +1,11 @@
-<title>Index</title>
+<title>Home</title>
 
 <div class="container">
     {{#if user}}
     <h4>Active Person: {{user.username}}</h4> 
+
+    {{else}}
+    <h4>Please login.</h4> 
+
     {{/if}}
 </div>
